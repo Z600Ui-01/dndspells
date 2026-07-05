@@ -42,6 +42,13 @@ h1{font-size:26px;font-weight:500;letter-spacing:-0.02em;color:var(--text);}
 
 .controls{position:sticky;top:0;z-index:10;padding:16px 0 16px;border-bottom:1px solid var(--glass-line);margin-bottom:8px;
   background:transparent;}
+.controls::before{
+  content:"";position:absolute;top:0;bottom:0;left:-50vw;right:-50vw;z-index:-1;pointer-events:none;
+  background:linear-gradient(to bottom, rgba(10,10,10,0.96) 55%, rgba(10,10,10,0.75) 82%, rgba(10,10,10,0) 100%);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  -webkit-mask-image:linear-gradient(to bottom, #000 60%, transparent 100%);
+  mask-image:linear-gradient(to bottom, #000 60%, transparent 100%);
+}
 .searchbar{position:relative;margin-bottom:14px;}
 .searchbar input{
   width:100%;height:46px;border:1px solid var(--glass-border);border-radius:12px;
@@ -206,7 +213,7 @@ SCHOOLS.forEach(s=>{
 const compChips = document.getElementById("comp-chips");
 COMPS.forEach(c=>{
   const b=document.createElement("button");
-  b.className="chip"; b.textContent=c; b.dataset.comp=c;
+  b.className="chip"; b.textContent=c+"만"; b.dataset.comp=c;
   b.onclick=()=>{ toggle(state.comps,c,b); render(); };
   compChips.appendChild(b);
 });
