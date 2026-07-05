@@ -88,11 +88,13 @@ h1{font-size:26px;font-weight:700;letter-spacing:-0.02em;}
 .tags{display:flex;gap:5px;margin-top:2px;flex-wrap:nowrap;min-height:21px;overflow:hidden;}
 .tag{
   font-size:10.5px;font-weight:600;letter-spacing:0.02em;
-  padding:2px 7px;border-radius:5px;white-space:nowrap;flex:none;
-  border:1px solid var(--ink);color:var(--ink);background:var(--bg);
+  padding:2px 8px;border-radius:5px;white-space:nowrap;flex:none;
+  border:none;
   display:inline-flex;align-items:center;gap:3px;
 }
 .tag i{font-size:11px;line-height:1;}
+.tag.ritual{background:#EEEDFE;color:#3C3489;}
+.tag.concentration{background:#FCF3C7;color:#8A6D00;}
 
 .empty{text-align:center;padding:60px 20px;color:var(--muted);font-size:15px;}
 
@@ -168,7 +170,7 @@ const ICONS = {
   "예지계":"ti-eye",
   "조형계":"ti-sparkles",
   "환영계":"ti-ghost-2",
-  "환혹계":"ti-wand"
+  "환혹계":"ti-heart"
 }
 
 const state = { search:"", levels:new Set(), schools:new Set(), comps:new Set(), ritual:false, concentration:false, sort:"ko" };
@@ -271,8 +273,8 @@ function render(){
     const comps=sp.components.map(c=>`<span class="comp">${c}</span>`).join("");
     const iconClass=ICONS[sp.school]||"";
     let tags="";
-    if(sp.ritual) tags+=`<span class="tag"><i class="ti ti-pentagram" aria-hidden="true"></i>의식</span>`;
-    if(sp.concentration) tags+=`<span class="tag"><i class="ti ti-eye" aria-hidden="true"></i>집중</span>`;
+    if(sp.ritual) tags+=`<span class="tag ritual"><i class="ti ti-pentagram" aria-hidden="true"></i>의식</span>`;
+    if(sp.concentration) tags+=`<span class="tag concentration"><i class="ti ti-eye" aria-hidden="true"></i>집중</span>`;
     const tagsHtml = `<div class="tags">${tags}</div>`;
     card.innerHTML=
       `<div class="card-top"><i class="ti ${iconClass} school-icon" aria-hidden="true"></i><span class="school-tag">${sp.school}</span></div>`+
