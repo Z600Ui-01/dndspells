@@ -213,8 +213,10 @@ function match(sp){
   }
   if(state.levels.size && !state.levels.has(sp.level)) return false;
   if(state.schools.size && !state.schools.has(sp.school)) return false;
+  // 구성요소 필터: 아무것도 선택 안 하면 전체, 선택하면 그 조합과 정확히 일치하는 카드만
   if(state.comps.size){
-    for(const c of state.comps){ if(!sp.components.includes(c)) return false; }
+    if(sp.components.length !== state.comps.size) return false;
+    for(const c of sp.components){ if(!state.comps.has(c)) return false; }
   }
   return true;
 }
