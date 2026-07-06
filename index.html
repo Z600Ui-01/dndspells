@@ -22,7 +22,7 @@
   --chip-bg:rgba(255,255,255,0.1);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-html{background:var(--bg);}
+html{background:var(--bg);overflow-x:hidden;}
 body{
   font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
   color:var(--text);
@@ -218,18 +218,21 @@ h1{font-size:26px;font-weight:500;letter-spacing:-0.02em;color:var(--text);}
     backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
   }
   /* 모바일: 다이얼로그를 하단 시트로 */
-  .dialog-overlay{padding:0;align-items:flex-end;}
+  .dialog-overlay{padding:0;align-items:flex-end;overflow-x:hidden;}
   .dialog{
-    max-width:100%;width:100%;
+    width:100%;max-width:100%;box-sizing:border-box;
     max-height:92vh;max-height:92dvh;
     border-radius:18px 18px 0 0;
     border-left:none;border-right:none;border-bottom:none;
-    transform:translateY(100%);
+    transform:translateY(100%);overflow-x:hidden;
   }
   .dialog-overlay.open .dialog{transform:translateY(0);}
   .dlg-head{padding:20px 18px 14px;}
-  .dlg-scroll{padding:16px 18px calc(24px + env(safe-area-inset-bottom));}
+  .dlg-scroll{padding:16px 18px calc(24px + env(safe-area-inset-bottom));overflow-x:hidden;}
   .dlg-name{font-size:20px;}
+  .dlg-desc, .dlg-higher, .dlg-field, .dlg-fval, .dlg-en{overflow-wrap:break-word;word-break:break-word;}
+  .dlg-table{table-layout:fixed;width:100%;}
+  .dlg-table th, .dlg-table td{overflow-wrap:break-word;word-break:break-word;}
 }
 </style>
 </head>
