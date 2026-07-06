@@ -131,7 +131,7 @@ h1{font-size:26px;font-weight:500;letter-spacing:-0.02em;color:var(--text);}
 /* ===== 상세 다이얼로그 ===== */
 .card{cursor:pointer;}
 .dialog-overlay{
-  position:fixed;inset:0;z-index:100;
+  position:fixed;inset:0;z-index:100;overscroll-behavior:contain;
   display:flex;align-items:center;justify-content:center;padding:24px;
   background:rgba(5,5,10,0.6);
   backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
@@ -172,7 +172,7 @@ h1{font-size:26px;font-weight:500;letter-spacing:-0.02em;color:var(--text);}
 .dlg-name{font-size:22px;font-weight:500;}
 .dlg-en{font-size:14px;margin-top:3px;}
 .dlg-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;}
-.dlg-scroll{overflow-y:auto;padding:18px 22px 24px;}
+.dlg-scroll{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:18px 22px 24px;}
 .dlg-toggle-row{display:flex;justify-content:flex-start;margin-bottom:14px;}
 .dlg-toggle{
   font-family:inherit;font-size:11px;font-weight:500;color:var(--text-50);
@@ -557,16 +557,29 @@ function renderDialog(){
   document.getElementById("dlg-toggle").onclick=()=>{ dlgShowEn=!dlgShowEn; renderDialog(); };
 }
 
+let dlgScrollY=0;
 function openDialog(sp){
   dlgSpell=sp; dlgShowEn=false;
   dlg.className="dialog s-"+sp.school;
   renderDialog();
   overlay.classList.add("open");
+  dlgScrollY=window.scrollY||window.pageYOffset||0;
+  document.body.style.position="fixed";
+  document.body.style.top=(-dlgScrollY)+"px";
+  document.body.style.left="0";
+  document.body.style.right="0";
+  document.body.style.width="100%";
   document.body.style.overflow="hidden";
 }
 function closeDialog(){
   overlay.classList.remove("open");
+  document.body.style.position="";
+  document.body.style.top="";
+  document.body.style.left="";
+  document.body.style.right="";
+  document.body.style.width="";
   document.body.style.overflow="";
+  window.scrollTo(0, dlgScrollY);
   dlgSpell=null;
 }
 overlay.addEventListener("click", e=>{ if(e.target===overlay) closeDialog(); });
