@@ -121,6 +121,12 @@ h1{font-size:26px;font-weight:500;letter-spacing:-0.02em;color:var(--text);}
   .grid{grid-template-columns:1fr 1fr;gap:12px;}
   .card-name{font-size:15px;}
   .filter-row{gap:14px;}
+  .controls::before{
+    background:linear-gradient(to bottom, rgba(10,10,10,0.99) 78%, rgba(10,10,10,0.9) 92%, rgba(10,10,10,0) 100%);
+    -webkit-mask-image:linear-gradient(to bottom, #000 85%, transparent 100%);
+    mask-image:linear-gradient(to bottom, #000 85%, transparent 100%);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  }
 }
 </style>
 </head>
