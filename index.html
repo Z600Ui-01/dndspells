@@ -533,8 +533,8 @@ function renderDialog(){
     fieldHtml("시전 시간", sp.casting_time_ko, sp.casting_time_en)+
     fieldHtml("사거리", sp.range_ko, sp.range_en)+
     fieldHtml("지속 시간", sp.duration_ko, sp.duration_en)+
-    (sp.damage_en? fieldHtml("피해", sp.damage_ko, sp.damage_en):"")+
-    (sp.material_en? fieldHtml("물질 구성요소", sp.material_ko, sp.material_en):"");
+    (sp.damage_ko? fieldHtml("피해", sp.damage_ko, sp.damage_en || sp.damage_ko):"")+
+    (sp.material_ko? fieldHtml("물질 구성요소", sp.material_ko, sp.material_en || sp.material_ko):"");
 
   const toggleLabel = dlgShowEn ? "한국어로 전환" : "영어로 전환";
   const body=
