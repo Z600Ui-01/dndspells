@@ -805,9 +805,14 @@ function renderDialog(){
   if(sp.concentration) attrIcons+=`<span class="attr-ic concentration" title="집중"><i class="ti ti-eye" aria-hidden="true"></i></span>`;
 
   // 상단: 카드와 동일 UI (영어명은 Uncial 폰트 유지)
-  const clsTagsInline = (sp.classes&&sp.classes.length)
-    ? sp.classes.map(c=>`<span class="cls-tag">#${c}</span>`).join("")
-    : "";
+  const clsTagsInline = (function(){
+    const cls = sp.classes||[];
+    if(!cls.length) return "";
+    const MAX = 3;
+    const shown = cls.slice(0, MAX).map(c=>`<span class="cls-tag">#${c}</span>`).join("");
+    const rest = cls.length - MAX;
+    return rest > 0 ? shown + `<span class="cls-tag cls-more">+${rest}</span>` : shown;
+  })();
   const head=
     `<div class="dlg-card-top"><i class="ti ${iconClass} school-icon" aria-hidden="true"></i><span class="school-tag">${sp.school}</span></div>`+
     `<div class="dlg-title"><div class="card-name dlg-name">${sp.name_ko}</div><div class="card-en dlg-en">${enName(sp.name_en)}</div></div>`+
